@@ -1,0 +1,7 @@
+.terraform
+.idea
+.terraform.lock.hcl
+deploy/local/export-variables.sh
+*.plan.bin
+*.tfstate
+*.tfstate.backup
