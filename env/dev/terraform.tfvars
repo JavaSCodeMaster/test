@@ -1,0 +1,8 @@
+env_suffix                = "dev"
+region_suffix             = "we"
+instance_suffix           = "010"
+region                    = "West Europe"
+account_tier              = "Standard"
+account_replication_type  = "LRS"
+os_type                   = "Windows"
+sku_name                  = "S1"

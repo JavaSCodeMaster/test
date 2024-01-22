@@ -1,0 +1,8 @@
+env_suffix                = "prod"
+region_suffix             = "we"
+instance_suffix           = "010"
+region                    = "West Europe"
+account_tier              = "Standard"
+account_replication_type  = "GRS"
+os_type                   = "Windows"
+sku_name                  = "P1v2"
