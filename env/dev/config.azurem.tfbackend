@@ -1,0 +1,4 @@
+resource_group_name  = rs-landing-zone-we-001
+storage_account_name = stterraformstatewe001
+container_name       = "tfstate"
+key                  = "terraform-dev.tfstate"
