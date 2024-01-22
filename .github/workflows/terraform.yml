@@ -89,6 +89,7 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
+      id: terraform_plan
       run: terraform plan -input=false -var-file="env/prod/terraform.tfvars" -out="terraform.plan.bin"
 
     - name: Submit plan for approval
