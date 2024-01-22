@@ -83,11 +83,11 @@ jobs:
       run: ls -la
     
     - name: Ls -la
-      id: ls
+      id: ls_env
       run: ls -la env/
 
     - name: Ls -la
-      id: ls
+      id: ls_env_prod
       run: ls -la env/prod/
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
