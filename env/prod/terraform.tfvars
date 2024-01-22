@@ -1,6 +1,6 @@
 env_suffix                = "prod"
 region_suffix             = "we"
-instance_suffix           = "010"
+instance_suffix           = "011"
 region                    = "West Europe"
 account_tier              = "Standard"
 account_replication_type  = "GRS"
