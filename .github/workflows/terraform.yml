@@ -81,7 +81,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-        terroform_version: ${{ vars.TF_VERSION }}
+        terraform_version: ${{ vars.TF_VERSION }}
 
     - name: Terraform Version
       run: terraform -v
@@ -160,7 +160,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-        terroform_version: ${{ vars.TF_VERSION }}
+        terraform_version: ${{ vars.TF_VERSION }}
 
     - name: Terraform Version
       run: terraform -v
