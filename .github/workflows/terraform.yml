@@ -100,11 +100,11 @@ jobs:
       with:
         # Name of the artifact to upload.
         # Optional. Default is 'artifact'
-        name: "terraform.${{vars.ENV_DIR}}.plan.bin"
+        name: "terraform.plan.bin"
     
         # A file, directory or wildcard pattern that describes what to upload
         # Required.
-        path: "env/${{vars.ENV_DIR}}/terraform.${{vars.ENV_DIR}}.plan.bin"
+        path: "env/${{vars.ENV_DIR}}/terraform.plan.bin"
         
         # Duration after which artifact will expire in days. 0 means using default retention.
         # Minimum 1 day.
@@ -141,7 +141,7 @@ jobs:
         # Name of the artifact to download.
         # If unspecified, all artifacts for the run are downloaded.
         # Optional.
-        name: "terraform.${{vars.ENV_DIR}}.plan.bin"
+        name: "terraform.plan.bin"
     
         # Destination path. Supports basic tilde expansion.
         # Optional. Default is $GITHUB_WORKSPACE
@@ -157,4 +157,4 @@ jobs:
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      run: terraform apply -auto-approve -input=false "terraform.${{vars.ENV_DIR}}.plan.bin"
+      run: terraform apply -auto-approve -input=false "terraform.plan.bin"
