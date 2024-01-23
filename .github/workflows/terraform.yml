@@ -80,6 +80,9 @@ jobs:
       with:
         terroform_version: ${{ vars.TF_VERSION }}
 
+    - name: Terraform Version
+      run: terraform -v
+        
     - name: Get secreets
       run: echo "ARM_CLIENT_ID ${{ secrets.ARM_CLIENT_ID }}  and version ${{vars.TF_VERSION}}"
 
@@ -155,10 +158,13 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terroform_version: ${{ vars.TF_VERSION }}
-        
+
+    - name: Terraform Version
+      run: terraform -v
+                
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init -backend-config="env/${{vars.ENV_DIR}}/config.azurem.tfbackend"
+    # - name: Terraform Init
+      # run: terraform init -backend-config="env/${{vars.ENV_DIR}}/config.azurem.tfbackend"
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
