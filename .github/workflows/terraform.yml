@@ -142,12 +142,18 @@ jobs:
         # Name of the artifact to download.
         # If unspecified, all artifacts for the run are downloaded.
         # Optional.
-        name: "terraform.${{vars.ENV_DIR}}.plan.bin"
+        name: "terraform.${{vars.ENV_DIR}}.plan.bin.zip"
     
         # Destination path. Supports basic tilde expansion.
         # Optional. Default is $GITHUB_WORKSPACE
         path: "./"
         
+    - name: "ls -la"
+      run: ls -la
+              
+    - name: "Unpack artifact"
+      run: "unzip terraform.${{vars.ENV_DIR}}.plan.bin.zip"
+      
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init -backend-config="env/${{vars.ENV_DIR}}/config.azurem.tfbackend"
