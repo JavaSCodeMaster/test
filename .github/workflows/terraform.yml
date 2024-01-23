@@ -53,8 +53,8 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  terraform-plan:
+    name: 'Terraform Plan build'
     runs-on: ubuntu-latest
     environment: prod
     env:
@@ -94,6 +94,28 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -var-file="env/${{vars.ENV_DIR}}/terraform.tfvars" -out="env/${{vars.ENV_DIR}}/terraform.plan.bin" 
+
+  terraform-apply:
+    needs: [terraform-plan]
+    name: 'Terraform apply'
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID}}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET}}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID}}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID}}
+
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init -backend-config="env/${{vars.ENV_DIR}}/config.azurem.tfbackend"
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
