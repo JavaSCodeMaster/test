@@ -142,7 +142,7 @@ jobs:
         # Name of the artifact to download.
         # If unspecified, all artifacts for the run are downloaded.
         # Optional.
-        name: "terraform.${{vars.ENV_DIR}}.plan.bin.zip"
+        name: "terraform.${{vars.ENV_DIR}}.plan.bin"
     
         # Destination path. Supports basic tilde expansion.
         # Optional. Default is $GITHUB_WORKSPACE
