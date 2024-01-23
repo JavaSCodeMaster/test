@@ -76,13 +76,19 @@ jobs:
     
     - name: Terraform Version
       run: echo " TF version ${{ vars.TF_VERSION }}"
+        
+    - name: "ls -la"
+      run: ls -la
       
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: ${{ vars.TF_VERSION }}
-
+        
+    - name: "ls -la"
+      run: ls -la
+      
     - name: Terraform Version
       run: terraform -v
         
@@ -157,10 +163,10 @@ jobs:
       run: ls -la
     
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    # - name: Setup Terraform
-      # uses: hashicorp/setup-terraform@v1
-      # with:
-        # terraform_version: ${{ vars.TF_VERSION }}
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: ${{ vars.TF_VERSION }}
 
     - name: Terraform Version
       run: terraform -v
