@@ -95,6 +95,29 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -var-file="env/${{vars.ENV_DIR}}/terraform.tfvars" -out="env/${{vars.ENV_DIR}}/terraform.plan.bin" 
 
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        # Name of the artifact to upload.
+        # Optional. Default is 'artifact'
+        name: "terraform.${{vars.ENV_DIR}}.plan.bin"
+    
+        # A file, directory or wildcard pattern that describes what to upload
+        # Required.
+        path: "env/${{vars.ENV_DIR}}/terraform.plan.bin"
+        
+        # Duration after which artifact will expire in days. 0 means using default retention.
+        # Minimum 1 day.
+        # Maximum 90 days unless changed from the repository settings page.
+        # Optional. Defaults to repository settings.
+        retention-days: 1
+        
+        # If true, an artifact with a matching name will be deleted before a new one is uploaded.
+        # If false, the action will fail if an artifact for the given name already exists.
+        # Does not fail if the artifact does not exist.
+        # Optional. Default is 'false'
+        overwrite: 'true'
+        
   terraform-apply:
     needs: [terraform-plan]
     name: 'Terraform apply'
@@ -113,6 +136,18 @@ jobs:
         shell: bash
 
     steps:
+    - name: "Download Terreform Plan"
+      uses: actions/download-artifact@v4
+      with:
+        # Name of the artifact to download.
+        # If unspecified, all artifacts for the run are downloaded.
+        # Optional.
+        name: "terraform.${{vars.ENV_DIR}}.plan.bin"
+    
+        # Destination path. Supports basic tilde expansion.
+        # Optional. Default is $GITHUB_WORKSPACE
+        path: "./"
+        
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init -backend-config="env/${{vars.ENV_DIR}}/config.azurem.tfbackend"
